@@ -1,3 +1,6 @@
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 #### 1. Introduction
 
 Quantum computing harnesses the principles of quantum mechanics to process information in fundamentally different ways than classical computers. This experiment focuses on applying linear algebra concepts to understand and visualize real quantum gates and circuits. Linear algebra provides the mathematical framework for describing quantum states, quantum operations, and quantum measurements.
@@ -10,32 +13,42 @@ Unlike classical bits that are either 0 or 1, quantum bits (qubits) can exist in
 
 A single qubit state is represented as a vector in a 2-dimensional complex Hilbert space:
 
-**Qubit state: |ψ⟩ = α|0⟩ + β|1⟩**
+$$
+|\psi\rangle = \alpha|0\rangle + \beta|1\rangle
+$$
 
 Where:
 
-- **|0⟩ = [1, 0]** (computational basis state 0)
-- **|1⟩ = [0, 1]** (computational basis state 1)
-- **α, β ∈ C** are complex amplitudes
-- **Normalization condition**: |α|² + |β|² = 1
+- $|0\rangle = \begin{bmatrix}1 & 0\end{bmatrix}$ (computational basis state 0)
+- $|1\rangle = \begin{bmatrix}0 & 1\end{bmatrix}$ (computational basis state 1)
+- $\alpha, \beta \in \mathbb{C}$ are complex amplitudes
+- $|\alpha|^2 + |\beta|^2 = 1$
 
-The probability of measuring state |0⟩ is |α|² and state |1⟩ is |β|².
+The probability of measuring state $|0\rangle$ is $|\alpha|^2$ and state $|1\rangle$ is $|\beta|^2$.
 
 ##### 2.2 Multi-Qubit Systems
 
-For a system of n qubits, the state vector lives in a 2^n-dimensional Hilbert space:
+For a system of $n$ qubits, the state vector lives in a $2^n$-dimensional Hilbert space:
 
-**|ψ⟩ = Σ(i=0 to 2^n-1) c_i|i⟩**
+$$
+|\psi\rangle = \sum_{i=0}^{2^n-1} c_i|i\rangle
+$$
 
-With normalization: Σ(i=0 to 2^n-1) |c_i|² = 1
+With normalization:
+
+$$
+\sum_{i=0}^{2^n-1} |c_i|^2 = 1
+$$
 
 #### 3. Quantum Gates as Unitary Matrices
 
-Quantum gates are linear operators that evolve quantum states. They are represented by **unitary matrices** - matrices U satisfying:
+Quantum gates are linear operators that evolve quantum states. They are represented by **unitary matrices**:
 
-**U† U = U U† = I**
+$$
+U^\dagger U = U U^\dagger = I
+$$
 
-Where U† is the complex conjugate transpose (adjoint), and I is the identity matrix.
+Where $$U^\dagger$$ is the complex conjugate transpose (adjoint), and $$I$$ is the identity matrix.
 
 ##### Properties of Unitary Operations:
 
@@ -51,79 +64,102 @@ Where U† is the complex conjugate transpose (adjoint), and I is the identity m
 
 **Pauli-X (NOT gate)**:
 
-```
-X = [0  1]
-    [1  0]
-```
+$$
+X =
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+$$
 
-Flips |0⟩ → |1⟩ and |1⟩ → |0⟩
+Flips $|0\rangle \rightarrow |1\rangle$ and $|1\rangle \rightarrow |0\rangle$
 
 **Pauli-Y**:
 
-```
-Y = [0  -i]
-    [i   0]
-```
+$$
+Y =
+\begin{bmatrix}
+0 & -i \\
+i & 0
+\end{bmatrix}
+$$
 
 **Pauli-Z**:
 
-```
-Z = [1   0]
-    [0  -1]
-```
+$$
+Z =
+\begin{bmatrix}
+1 & 0 \\
+0 & -1
+\end{bmatrix}
+$$
 
-Applies a phase of -1 to |1⟩
+Applies a phase of -1 to $|1\rangle$
 
 ###### Hadamard Gate
 
-```
-H = (1/√2) * [1   1]
-             [1  -1]
-```
+$$
+H = \frac{1}{\sqrt{2}}
+\begin{bmatrix}
+1 & 1 \\
+1 & -1
+\end{bmatrix}
+$$
 
-Creates superposition: H|0⟩ = (1/√2)(|0⟩ + |1⟩)
+Creates superposition:
+
+$$
+H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)
+$$
 
 ###### Phase Gates
 
-**S Gate (Phase gate)**:
+$$
+S =
+\begin{bmatrix}
+1 & 0 \\
+0 & i
+\end{bmatrix}
+$$
 
-```
-S = [1  0]
-    [0  i]
-```
-
-**T Gate**:
-
-```
-T = [1    0  ]
-    [0  e^(iπ/4)]
-```
+$$
+T =
+\begin{bmatrix}
+1 & 0 \\
+0 & e^{i\pi/4}
+\end{bmatrix}
+$$
 
 ##### 4.2 Two-Qubit Gates
 
 ###### CNOT (Controlled-NOT) Gate
 
-A 4×4 unitary matrix acting on two qubits:
+$$
+\text{CNOT} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{bmatrix}
+$$
 
-```
-CNOT = [1  0  0  0]
-       [0  1  0  0]
-       [0  0  0  1]
-       [0  0  1  0]
-```
-
-The CNOT gate flips the target qubit if the control qubit is |1⟩.
+The CNOT gate flips the target qubit if the control qubit is $|1\rangle$.
 
 ###### SWAP Gate
 
-```
-SWAP = [1  0  0  0]
-       [0  0  1  0]
-       [0  1  0  0]
-       [0  0  0  1]
-```
+$$
+\text{SWAP} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
 
 Exchanges the states of two qubits.
+
 
 #### 5. Quantum Circuits
 
@@ -132,70 +168,80 @@ A quantum circuit is a sequence of quantum gates applied to qubits in a specific
 - **Horizontal lines** represent qubits
 - **Boxes** represent quantum gates
 - **Reading left to right** shows the temporal order of operations
-
 ##### Circuit States Evolution
 
-For a circuit with gates U₁, U₂, ..., U_n applied sequentially to initial state |ψ₀⟩:
+For a circuit with gates $U_1, U_2, \dots, U_n$ applied sequentially to initial state $|\psi_0\rangle$:
 
-**|ψ_f⟩ = U_n · ... · U₂ · U₁ · |ψ₀⟩**
-
+$$
+|\psi_f\rangle = U_n \cdots U_2 U_1 |\psi_0\rangle
+$$
 The transformation is computed by matrix multiplication.
-
 #### 6. Bell States (Two-Qubit Entanglement)
-
 Bell states are maximally entangled two-qubit states. They form an orthonormal basis and cannot be factored into individual qubit states.
 
 ##### The Four Bell States:
+$$
+|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+$$
 
-**|Φ⁺⟩ = (1/√2)(|00⟩ + |11⟩)**
+$$
+|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)
+$$
 
-**|Φ⁻⟩ = (1/√2)(|00⟩ - |11⟩)**
+$$
+|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)
+$$
 
-**|Ψ⁺⟩ = (1/√2)(|01⟩ + |10⟩)**
+$$
+|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)
+$$
 
-**|Ψ⁻⟩ = (1/√2)(|01⟩ - |10⟩)**
 
 ##### Bell State Preparation (Bell Pair Circuit)
 
-To create the Bell state |Φ⁺⟩:
+To create the Bell state $|\Phi^+\rangle$:
 
-1. Initialize two qubits to |00⟩
-2. Apply Hadamard gate to first qubit: H|00⟩ = (1/√2)(|00⟩ + |10⟩)
-3. Apply CNOT gate with first qubit as control: CNOT · H|00⟩ = (1/√2)(|00⟩ + |11⟩) = |Φ⁺⟩
+1. Initialize two qubits to $|00\rangle$
+2. Apply Hadamard gate to first qubit: $H|00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)$
+3. Apply CNOT gate with first qubit as control: $CNOT \cdot H|00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = |\Phi^+\rangle$
 
 ##### Mathematical Representation:
 
 State vector representation:
 
-```
-|Φ⁺⟩ = [1/√2]
-       [  0 ]
-       [  0 ]
-       [1/√2]
-```
+$$
+|\Phi^+\rangle = 
+\begin{bmatrix}
+1/\sqrt{2} \\
+0 \\
+0 \\
+1/\sqrt{2}
+\end{bmatrix}
+$$
 
-(In basis ordering |00⟩, |01⟩, |10⟩, |11⟩)
+(In basis ordering $|00\rangle, |01\rangle, |10\rangle, |11\rangle$)
 
 #### 7. GHZ State (Three-Qubit Entanglement)
+
 
 The GHZ state is a three-qubit entangled state with interesting properties.
 
 ##### GHZ State Definition:
-
-**|GHZ⟩ = (1/√2)(|000⟩ + |111⟩)**
-
+$$
+|GHZ\rangle = \frac{1}{\sqrt{2}}(|000\rangle + |111\rangle)
+$$
 ##### GHZ State Preparation Circuit:
 
-1. Initialize three qubits to |000⟩
-2. Apply Hadamard to first qubit: H|000⟩ = (1/√2)(|000⟩ + |100⟩)
-3. Apply CNOT (control: qubit 1, target: qubit 2): Creates (1/√2)(|000⟩ + |110⟩)
-4. Apply CNOT (control: qubit 1, target: qubit 3): Creates |GHZ⟩ = (1/√2)(|000⟩ + |111⟩)
+1. Initialize three qubits to $|000\rangle$
+2. Apply Hadamard to first qubit: $H|000\rangle = \frac{1}{\sqrt{2}}(|000\rangle + |100\rangle)$
+3. Apply CNOT (control: qubit 1, target: qubit 2): Creates $\frac{1}{\sqrt{2}}(|000\rangle + |110\rangle)$
+4. Apply CNOT (control: qubit 1, target: qubit 3): Creates $|GHZ\rangle = \frac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$
 
 ##### Properties:
 
 - **Three-qubit correlations**: Measuring all three qubits always gives either all 0s or all 1s
 - **Perfect correlations**: GHZ state demonstrates perfect multi-partite correlation
-- **Basis ordering**: |000⟩, |001⟩, |010⟩, |011⟩, |100⟩, |101⟩, |110⟩, |111⟩
+- **Basis ordering**: $|000\rangle, |001\rangle, |010\rangle, |011\rangle, |100\rangle, |101\rangle, |110\rangle, |111\rangle$
 
 #### 8. Quantum State Measurement
 
@@ -203,26 +249,26 @@ Measurement collapses a quantum state to a classical outcome according to the Bo
 
 ##### Born Rule:
 
-For a state |ψ⟩ = Σ_i c_i|i⟩ measured in the computational basis:
+For a state $|\psi\rangle = \sum_i c_i|i\rangle$ measured in the computational basis:
 
-- **Probability** of obtaining outcome i: P(i) = |c_i|²
-- **State collapse**: Upon measurement of outcome i, state becomes |i⟩
+- **Probability** of obtaining outcome i: $P(i) = |c_i|^2$
+- **State collapse**: Upon measurement of outcome i, state becomes $|i\rangle$
 
 ##### State Vector Visualization:
 
-For a qubit state |ψ⟩ = α|0⟩ + β|1⟩:
+For a qubit state $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$:
 
-- Plot amplitudes α and β as complex numbers
+- Plot amplitudes $\alpha$ and $\beta$ as complex numbers
 - Magnitude represents amplitude strength
 - Phase represents phase relationship
 
 ##### Measurement Outcomes:
 
-For Bell state |Φ⁺⟩ = (1/√2)(|00⟩ + |11⟩):
+For Bell state $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$:
 
-- Probability of measuring |00⟩: |(1/√2)|² = 0.5 or 50%
-- Probability of measuring |11⟩: |(1/√2)|² = 0.5 or 50%
-- Probability of measuring |01⟩ or |10⟩: 0%
+- Probability of measuring $|00\rangle$: $|\frac{1}{\sqrt{2}}|^2 = 0.5$ or $50\%$
+- Probability of measuring $|11\rangle$: $|\frac{1}{\sqrt{2}}|^2 = 0.5$ or $50\%$
+- Probability of measuring $|01\rangle$ or $|10\rangle$: $0\%$
 
 #### 9. Matrix Decomposition of Quantum Gates
 
@@ -233,19 +279,25 @@ Complex quantum gates can be decomposed into simpler, fundamental gates. This is
 A set of quantum gates is **universal** if any quantum operation can be approximated arbitrarily closely using only gates from this set.
 
 Common universal gate sets include:
-
-- **{H, S, CNOT}**: Hadamard, Phase, CNOT
-- **{T, H, CNOT}**: T-gate, Hadamard, CNOT
-- **{X, Y, Z, CNOT}**: All Pauli + CNOT
+$$
+U = e^{i\alpha}
+\begin{bmatrix}
+e^{-i\beta/2}\cos(\gamma/2) & -e^{-i\delta/2}\sin(\gamma/2) \\
+e^{i\delta/2}\sin(\gamma/2) & e^{i\beta/2}\cos(\gamma/2)
+\end{bmatrix}
+$$
 
 ##### 9.2 Basis Decomposition Example
 
 Any single-qubit unitary can be decomposed as:
 
-```
-U = e^(iα) * [e^(-iβ/2)cos(γ/2)   -e^(-iδ/2)sin(γ/2)]
-             [e^(iδ/2)sin(γ/2)    e^(iβ/2)cos(γ/2)]
-```
+$$
+U = e^{i\alpha}
+\begin{bmatrix}
+e^{-i\beta/2}\cos(\gamma/2) & -e^{-i\delta/2}\sin(\gamma/2) \\
+e^{i\delta/2}\sin(\gamma/2) & e^{i\beta/2}\cos(\gamma/2)
+\end{bmatrix}
+$$
 
 This is known as the **Euler decomposition** for single-qubit rotations.
 
@@ -263,24 +315,26 @@ Gate decomposition allows:
 
 In this simulation, we track the full quantum state vector through each gate application:
 
-1. **Initialize**: State vector for n qubits is length 2^n
+1. **Initialize**: State vector for $n$ qubits is length $2^n$
 2. **Apply gates**: Multiply by unitary matrix of each gate
 3. **Normalize**: Ensure state remains normalized after operations
-4. **Measure**: Sample from probability distribution |c_i|² for each basis state
+4. **Measure**: Sample from probability distribution $|c_i|^2$ for each basis state
 
-##### 10.3 Single Qubit Rotation Gates
+##### 10.2 Single Qubit Rotation Gates
 
-General rotations around axis **n̂** = (n_x, n_y, n_z) by angle θ:
+General rotations around axis $\hat{n} = (n_x, n_y, n_z)$ by angle $\theta$:
+$$
+R_{\hat{n}}(\theta) =
+\cos(\theta/2)I - i\sin(\theta/2)(n_x X + n_y Y + n_z Z)
+$$
 
-**R_n̂(θ) = cos(θ/2)I - i·sin(θ/2)(n_x·X + n_y·Y + n_z·Z)**
-
-##### 10.4 Bloch Sphere Representation
+##### 10.3 Bloch Sphere Representation
 
 For visualizing single-qubit states:
 
 - **Point on sphere** represents qubit state
-- **North pole** (↑) represents |0⟩
-- **South pole** (↓) represents |1⟩
+- **North pole** ($\uparrow$) represents $|0\rangle$
+- **South pole** ($\downarrow$) represents $|1\rangle$
 - **Equator** represents equal superposition states
 
 #### 11. Practical Applications

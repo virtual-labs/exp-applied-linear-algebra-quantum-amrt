@@ -10,7 +10,13 @@
 
 #### 1. Introduction
 
-Quantum computing harnesses the principles of quantum mechanics to process information in fundamentally different ways than classical computers. This experiment focuses on applying linear algebra concepts to understand and visualize real quantum gates and circuits. Linear algebra provides the mathematical framework for describing quantum states, quantum operations, and quantum measurements.
+Quantum computing harnesses the principles of quantum mechanics to process information in fundamentally different ways than classical computers. Unlike classical computation, where operations are performed on bits using logical gates, quantum computation operates on **qubits** using **quantum gates**, which are reversible linear transformations.
+
+Quantum gates are the fundamental building blocks of quantum circuits. Each gate is represented mathematically by a **unitary matrix**, and it transforms the state of qubits through matrix operations. By applying a sequence of such gates, a quantum system evolves from an initial state to a final state, where useful information can be extracted through measurement.
+
+Basic quantum gates such as **Pauli gates (X, Y, Z)**, the **Hadamard gate**, and **phase gates** perform simple operations like flipping states, creating superpositions, and introducing phase shifts. When combined in a circuit, these gates can generate complex quantum phenomena such as **interference** and **entanglement**, which are essential for quantum algorithms.
+
+For example, applying a Hadamard gate creates a superposition, while combining it with a **CNOT gate** can produce entangled states like Bell states. These gate operations form the foundation of more advanced quantum circuits used in algorithms such as search, optimization, and factorization.
 
 #### 2. Quantum Bits (Qubits)
 
